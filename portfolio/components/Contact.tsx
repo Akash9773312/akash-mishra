@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Mail, Phone, MapPin, Send, Code, Link } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, Code, Link as LinkIcon, Terminal } from 'lucide-react'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -70,30 +70,45 @@ export default function Contact() {
 
   const socialLinks = [
     {
-      icon: Link,
+      icon: LinkIcon,
       href: 'https://www.linkedin.com/in/akash-mishra-9b99451b9/',
       label: 'LinkedIn',
-      color: 'hover:text-blue-500',
+      color: 'hover:text-blue-400',
     },
     {
       icon: Code,
       href: 'https://github.com/Akash9773312',
       label: 'GitHub',
-      color: 'hover:text-gray-500',
+      color: 'hover:text-green-400',
     },
   ]
 
   return (
-    <section id="contact" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-20 bg-black relative">
+      {/* Matrix background */}
+      <div className="absolute inset-0 matrix-bg opacity-20"></div>
+
+      {/* Scanlines */}
+      <div className="absolute inset-0 scanlines opacity-30"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="mb-12 font-mono"
         >
-          <h2 className="text-4xl font-bold mb-4">Get In Touch</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          {/* Terminal header */}
+          <div className="flex items-center gap-2 mb-4">
+            <Terminal className="w-6 h-6 text-green-500 terminal-glow" />
+            <div className="text-green-500 text-lg">root@kali:~$</div>
+            <div className="text-green-400">./contact.sh</div>
+          </div>
+
+          <h2 className="text-4xl font-bold mb-4 text-green-400 terminal-glow">
+            <span className="text-green-500">&gt;</span> Get In Touch
+          </h2>
+          <p className="text-lg text-green-100/80 max-w-2xl">
             Have a project in mind or want to discuss cybersecurity? Let's connect!
           </p>
         </motion.div>
@@ -104,37 +119,41 @@ export default function Contact() {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="space-y-6"
+            className="space-y-6 font-mono"
           >
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-2xl">Contact Information</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {contactInfo.map((info) => (
+            <div className="border-2 border-green-500/30 rounded-lg bg-black/50 backdrop-blur-sm overflow-hidden">
+              <div className="border-b-2 border-green-500/30 bg-green-500/5 p-4">
+                <h3 className="text-xl text-green-400 terminal-glow">
+                  [Contact Information]
+                </h3>
+              </div>
+              <div className="p-6 space-y-4">
+                {contactInfo.map((info, index) => (
                   <a
                     key={info.label}
                     href={info.href}
-                    className="flex items-start gap-4 p-4 rounded-lg hover:bg-accent transition-colors group"
+                    className="flex items-start gap-4 p-4 border border-green-500/20 rounded-lg hover:border-green-500/40 transition-all group"
                   >
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                      <info.icon className="w-6 h-6 text-primary" />
+                    <div className="w-12 h-12 rounded bg-green-500/10 border border-green-500/30 flex items-center justify-center flex-shrink-0 group-hover:bg-green-500/20 transition-colors">
+                      <info.icon className="w-6 h-6 text-green-400 terminal-glow" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">{info.label}</p>
-                      <p className="font-medium">{info.value}</p>
+                      <p className="text-sm text-green-500 mb-1">{info.label}:</p>
+                      <p className="text-green-300">{info.value}</p>
                     </div>
                   </a>
                 ))}
-              </CardContent>
-            </Card>
+              </div>
+            </div>
 
             {/* Social Links */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Connect With Me</CardTitle>
-              </CardHeader>
-              <CardContent>
+            <div className="border-2 border-green-500/30 rounded-lg bg-black/50 backdrop-blur-sm overflow-hidden">
+              <div className="border-b-2 border-green-500/30 bg-green-500/5 p-4">
+                <h3 className="text-xl text-green-400 terminal-glow">
+                  [Connect With Me]
+                </h3>
+              </div>
+              <div className="p-6">
                 <div className="flex gap-4">
                   {socialLinks.map((social) => (
                     <motion.a
@@ -144,14 +163,14 @@ export default function Contact() {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.95 }}
-                      className={`w-12 h-12 rounded-lg bg-accent flex items-center justify-center transition-colors ${social.color}`}
+                      className={`w-12 h-12 rounded-lg bg-green-500/10 border border-green-500/30 flex items-center justify-center transition-colors text-green-400 ${social.color}`}
                     >
-                      <social.icon className="w-6 h-6" />
+                      <social.icon className="w-6 h-6 terminal-glow" />
                     </motion.a>
                   ))}
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </motion.div>
 
           {/* Contact Form */}
@@ -159,80 +178,98 @@ export default function Contact() {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
+            className="font-mono"
           >
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-2xl">Send Me a Message</CardTitle>
-              </CardHeader>
-              <CardContent>
+            <div className="border-2 border-green-500/30 rounded-lg bg-black/50 backdrop-blur-sm overflow-hidden">
+              <div className="border-b-2 border-green-500/30 bg-green-500/5 p-4">
+                <h3 className="text-xl text-green-400 terminal-glow">
+                  [Send Me a Message]
+                </h3>
+              </div>
+              <div className="p-6">
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
+                    <label className="text-green-500 text-sm mb-2 block">
+                      <span className="text-green-500">root@kali:~$</span> input --name
+                    </label>
                     <Input
                       type="text"
                       placeholder="Your Name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
-                      className="h-12"
+                      className="h-12 bg-black/50 border-green-500/30 text-green-300 placeholder:text-green-500/50 focus:border-green-500"
+                      suppressHydrationWarning
                     />
                   </div>
                   <div>
+                    <label className="text-green-500 text-sm mb-2 block">
+                      <span className="text-green-500">root@kali:~$</span> input --email
+                    </label>
                     <Input
                       type="email"
                       placeholder="Your Email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
-                      className="h-12"
+                      className="h-12 bg-black/50 border-green-500/30 text-green-300 placeholder:text-green-500/50 focus:border-green-500"
+                      suppressHydrationWarning
                     />
                   </div>
                   <div>
+                    <label className="text-green-500 text-sm mb-2 block">
+                      <span className="text-green-500">root@kali:~$</span> input --message
+                    </label>
                     <Textarea
                       placeholder="Your Message"
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       required
                       rows={6}
-                      className="resize-none"
+                      className="resize-none bg-black/50 border-green-500/30 text-green-300 placeholder:text-green-500/50 focus:border-green-500"
+                      suppressHydrationWarning
                     />
                   </div>
                   <Button
                     type="submit"
                     size="lg"
-                    className="w-full group"
+                    className="w-full bg-black border-2 border-green-500 text-green-400 hover:bg-green-500 hover:text-black shadow-lg shadow-green-500/20 hover:shadow-green-500/40 transition-all"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
-                      'Sending...'
+                      <span className="flex items-center gap-2">
+                        <span className="animate-spin">⚙</span>
+                        Processing...
+                      </span>
                     ) : (
-                      <>
-                        Send Message
-                        <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </>
+                      <span className="flex items-center gap-2">
+                        <Send className="w-4 h-4" />
+                        ./send_message.sh
+                      </span>
                     )}
                   </Button>
 
                   {submitStatus === 'success' && (
-                    <motion.p
+                    <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="text-green-500 text-sm text-center"
+                      className="text-green-400 text-sm text-center p-3 border border-green-500/30 bg-green-500/10 rounded"
                     >
-                      Message sent successfully!
-                    </motion.p>
+                      <span className="text-green-500">[SUCCESS]</span> Message sent successfully!
+                    </motion.div>
                   )}
                   {submitStatus === 'error' && (
-                    <motion.p
+                    <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="text-red-500 text-sm text-center"
+                      className="text-red-400 text-sm text-center p-3 border border-red-500/30 bg-red-500/10 rounded"
                     >
-                      Failed to send message. Please try again.
-                    </motion.p>
+                      <span className="text-red-500">[ERROR]</span> Failed to send message. Please try again.
+                    </motion.div>
                   )}
                 </form>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>

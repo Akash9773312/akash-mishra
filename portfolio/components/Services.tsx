@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Code, Database, Network, Shield, Wrench, Globe } from 'lucide-react'
+import { Code, Database, Network, Shield, Wrench, Globe, Terminal } from 'lucide-react'
 
 export default function Services() {
   const services = [
@@ -45,46 +45,96 @@ export default function Services() {
   ]
 
   return (
-    <section id="services" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="py-20 bg-black relative">
+      {/* Matrix background */}
+      <div className="absolute inset-0 matrix-bg opacity-20"></div>
+
+      {/* Scanlines */}
+      <div className="absolute inset-0 scanlines opacity-30"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="mb-12 font-mono"
         >
-          <h2 className="text-4xl font-bold mb-4">My Services</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          {/* Terminal header */}
+          <div className="flex items-center gap-2 mb-4">
+            <Terminal className="w-6 h-6 text-green-500 terminal-glow" />
+            <div className="text-green-500 text-lg">root@kali:~$</div>
+            <div className="text-green-400">./services.sh</div>
+          </div>
+
+          <h2 className="text-4xl font-bold mb-4 text-green-400 terminal-glow">
+            <span className="text-green-500">&gt;</span> My Services
+          </h2>
+          <p className="text-lg text-green-100/80 max-w-2xl">
             Comprehensive solutions for web development and cybersecurity needs
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-            >
-              <Card className="h-full hover:shadow-lg transition-shadow duration-300 border-border/50 hover:border-primary/50">
-                <CardHeader>
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${service.color} p-2.5 mb-4`}>
-                    <service.icon className="w-full h-full text-white" />
+        {/* Terminal window for services */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="border-2 border-green-500/30 rounded-lg bg-black/50 backdrop-blur-sm overflow-hidden"
+        >
+          {/* Services grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-0">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.title}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+                className={`p-6 border border-green-500/20 hover:border-green-500/40 transition-all ${
+                  index % 3 !== 2 ? 'border-r-0' : ''
+                } ${index < services.length - 3 ? 'border-b-0' : ''} ${index % 2 !== 0 ? 'md:border-r-0' : ''} ${
+                  index % 2 !== 1 ? 'lg:border-r-0' : ''
+                }`}
+              >
+                <div className="font-mono h-full">
+                  {/* Service number */}
+                  <div className="text-green-500 text-xs mb-2">
+                    [{String(index + 1).padStart(2, '0')}]
                   </div>
-                  <CardTitle className="text-xl">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-base leading-relaxed">
+
+                  {/* Icon */}
+                  <div className={`w-12 h-12 rounded bg-green-500/10 border border-green-500/30 p-2.5 mb-4`}>
+                    <service.icon className="w-full h-full text-green-400 terminal-glow" />
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl text-green-300 mb-3 terminal-glow">{service.title}</h3>
+
+                  {/* Description */}
+                  <p className="text-green-100/70 text-sm leading-relaxed">
                     {service.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+                  </p>
+
+                  {/* Command prompt style */}
+                  <div className="mt-4 pt-4 border-t border-green-500/20">
+                    <div className="text-green-500 text-xs">
+                      <span className="text-green-500">root@kali:~$</span> <span className="animate-blink">_</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Terminal footer */}
+          <div className="border-t-2 border-green-500/30 bg-green-500/5 p-3">
+            <div className="text-green-500 text-sm font-mono">
+              <span className="text-green-500">root@kali:~$</span> <span className="text-green-400">service_list_loaded=true</span>
+              <span className="animate-blink">█</span>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )

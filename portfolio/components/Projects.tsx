@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { ExternalLink, Code, FolderOpen, Star, GitFork, Shield } from 'lucide-react'
+import { ExternalLink, Code, FolderOpen, Star, GitFork, Shield, Terminal, FileCode } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export default function Projects() {
@@ -48,110 +48,140 @@ export default function Projects() {
       gradient: 'from-violet-500 to-purple-500',
       icon: Code,
     }
-    // {
-    //   title: 'Multi-Region CDN Solution',
-    //   description: 'Global content delivery network with automatic failover, edge computing capabilities, and intelligent routing ensuring 99.99% availability across 8+ geographic regions.',
-    //   tags: ['Cloudflare', 'AWS', 'Lambda', 'Route53'],
-    //   github: 'https://github.com/Akash9773312',
-    //   gradient: 'from-amber-500 to-yellow-500',
-    //   icon: Star,
-    // },
   ]
 
   return (
-    <section id="projects" className="py-20 bg-muted/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="py-20 bg-black relative">
+      {/* Matrix background */}
+      <div className="absolute inset-0 matrix-bg opacity-20"></div>
+
+      {/* Scanlines */}
+      <div className="absolute inset-0 scanlines opacity-30"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-12 font-mono"
         >
-          <h2 className="text-4xl font-bold mb-4">Featured Projects</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          {/* Terminal header */}
+          <div className="flex items-center gap-2 mb-4">
+            <Terminal className="w-6 h-6 text-green-500 terminal-glow" />
+            <div className="text-green-500 text-lg">root@kali:~$</div>
+            <div className="text-green-400">./list_projects.sh</div>
+          </div>
+
+          <h2 className="text-4xl font-bold mb-4 text-green-400 terminal-glow">
+            <span className="text-green-500">&gt;</span> Featured Projects
+          </h2>
+          <p className="text-lg text-green-100/80 max-w-2xl">
             Enterprise-grade solutions built with modern technologies and best practices
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -4 }}
-            >
-              <Card className="h-full hover:shadow-2xl transition-all duration-300 border-border/50 hover:border-primary/50 group relative overflow-hidden">
-                {/* Gradient accent */}
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
-
-                {/* Icon badge */}
-                <div className="absolute top-4 right-4">
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${project.gradient} p-2.5 opacity-80 group-hover:opacity-100 transition-opacity duration-300`}>
-                    <project.icon className="w-full h-full text-white" />
+        {/* Terminal window for projects */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="border-2 border-green-500/30 rounded-lg bg-black/50 backdrop-blur-sm overflow-hidden"
+        >
+          <div className="grid md:grid-cols-2 gap-0">
+            {projects.map((project, index) => (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -4 }}
+                className={`p-6 border border-green-500/20 hover:border-green-500/40 transition-all ${
+                  index % 2 === 0 ? 'md:border-r-0' : ''
+                } ${index < projects.length - 1 ? 'border-b-0 md:border-b-0' : ''} ${
+                  index === projects.length - 2 ? 'md:border-b-0' : ''
+                }`}
+              >
+                <div className="font-mono h-full">
+                  {/* Project number */}
+                  <div className="text-green-500 text-xs mb-2">
+                    PROJECT_{String(index + 1).padStart(2, '0')}
                   </div>
-                </div>
 
-                <CardHeader className="pb-4">
-                  <div className="flex items-start gap-3 mb-3">
-                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${project.gradient} p-2 flex-shrink-0`}>
-                      <project.icon className="w-full h-full text-white" />
+                  {/* Icon with terminal style */}
+                  <div className="flex items-start gap-3 mb-4">
+                    <div className="w-10 h-10 rounded bg-green-500/10 border border-green-500/30 p-2 flex-shrink-0">
+                      <project.icon className="w-full h-full text-green-400 terminal-glow" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <CardTitle className="text-xl mb-1 group-hover:text-primary transition-colors">
-                        {project.title}
-                      </CardTitle>
+                      <h3 className="text-lg text-green-300 mb-2 terminal-glow">{project.title}</h3>
                     </div>
                   </div>
-                  <CardDescription className="text-base leading-relaxed">
-                    {project.description}
-                  </CardDescription>
-                </CardHeader>
 
-                <CardContent className="space-y-4">
+                  {/* Description */}
+                  <p className="text-green-100/70 text-sm leading-relaxed mb-4">
+                    {project.description}
+                  </p>
+
                   {/* Tech Stack */}
-                  <div>
-                    <p className="text-xs font-semibold text-muted-foreground mb-2 uppercase tracking-wider">
-                      Tech Stack
+                  <div className="mb-4">
+                    <p className="text-xs text-green-500 mb-2 uppercase tracking-wider">
+                      [Tech Stack]
                     </p>
                     <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag) => (
                         <Badge
                           key={tag}
                           variant="secondary"
-                          className="text-xs font-normal px-2.5 py-1"
+                          className="text-xs font-normal px-2.5 py-1 bg-green-500/10 border border-green-500/20 text-green-300"
                         >
                           {tag}
                         </Badge>
                       ))}
                     </div>
                   </div>
-                </CardContent>
 
-                {/* Hover glow effect */}
-                <div className={`absolute -bottom-20 -right-20 w-40 h-40 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-5 blur-3xl transition-opacity duration-500 rounded-full pointer-events-none`} />
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+                  {/* Command prompt style */}
+                  <div className="mt-4 pt-4 border-t border-green-500/20">
+                    <div className="text-green-500 text-xs">
+                      <span className="text-green-500">root@kali:~$</span> ./view_details.sh --project={index + 1}
+                      <span className="animate-blink">█</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
+          {/* Terminal footer */}
+          <div className="border-t-2 border-green-500/30 bg-green-500/5 p-3">
+            <div className="text-green-500 text-sm font-mono">
+              <span className="text-green-500">root@kali:~$</span> <span className="text-green-400">projects_loaded=true</span>
+              <span className="animate-blink">█</span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* CTA Button */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center"
+          className="text-center mt-8 font-mono"
         >
-          <Button size="lg" variant="outline" className="group">
+          <Button
+            size="lg"
+            className="bg-black border-2 border-green-500 text-green-400 hover:bg-green-500 hover:text-black px-8 py-6 text-base shadow-lg shadow-green-500/20 hover:shadow-green-500/40 transition-all"
+          >
+            <FileCode className="w-5 h-5 mr-2" />
             <a
               href="https://github.com/Akash9773312"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2"
             >
-              Explore All Projects
-              <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              ./explore_all_projects.sh
+              <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </a>
           </Button>
         </motion.div>
