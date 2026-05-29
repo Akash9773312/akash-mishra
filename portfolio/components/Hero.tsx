@@ -176,7 +176,7 @@ export default function Hero() {
               <span className="ml-2 text-green-500 text-sm terminal-glow">root@kali:~</span>
             </div>
             <div className="text-green-400 text-sm">
-              <span className="text-green-500">root@kali:~$</span> <span className="animate-blink">_</span>
+              <span className="text-green-500">root@kali:~$</span> _
             </div>
           </motion.div>
 
@@ -198,10 +198,10 @@ export default function Hero() {
                 transform: 'translateZ(10px)'
               }}
             >
-              <div><span className="text-green-500">[</span><span className="text-yellow-400">OK</span><span className="text-green-500">]</span> Initializing system...</div>
+              <div><span className="text-green-500">[</span><span className="text-red-500">WARN</span><span className="text-green-500">]</span> Unauthorized access detected</div>
               <div><span className="text-green-500">[</span><span className="text-yellow-400">OK</span><span className="text-green-500">]</span> Loading profile data...</div>
-              <div><span className="text-green-500">[</span><span className="text-yellow-400">OK</span><span className="text-green-500">]</span> Establishing secure connection...</div>
-              <div><span className="text-green-500">[</span><span className="text-green-400">SUCCESS</span><span className="text-green-500">]</span> System ready</div>
+              <div><span className="text-green-500">[</span><span className="text-orange-500">CRITICAL</span><span className="text-green-500">]</span> Bypassing security protocols...</div>
+              <div><span className="text-green-500">[</span><span className="text-green-400">ACCESS</span><span className="text-green-500">]</span> System compromised</div>
             </motion.div>
 
             {/* Status badge */}
@@ -222,7 +222,6 @@ export default function Hero() {
               <Cpu className="w-4 h-4 text-green-500 terminal-glow" />
               <span className="text-green-400 text-sm">status: </span>
               <span className="text-green-300">Available for anything interesting.</span>
-              <span className="animate-blink text-green-500">█</span>
             </motion.div>
 
             {/* Main heading with terminal style */}
@@ -290,7 +289,6 @@ export default function Hero() {
                     </div>
                     <span className="text-green-300">[{index + 1}]</span>
                     <span className="text-green-300">{role.text}</span>
-                    <span className="animate-blink text-green-500">█</span>
                   </motion.div>
                 ))}
               </div>
@@ -360,9 +358,9 @@ export default function Hero() {
               className="absolute bottom-8 left-1/2 -translate-x-1/2"
             >
               <div className="flex flex-col items-center gap-2 font-mono text-xs text-green-500/70 backdrop-blur-sm px-4 py-2 rounded-full border border-green-500/20">
-                <span>[ Press Enter or scroll to continue... ]</span>
+                <span>[ WARNING: System breach in progress... ]</span>
                 <div className="flex items-center gap-2">
-                  <span className="animate-blink">_</span>
+                  <span className="text-red-500">⚠</span>
                 </div>
               </div>
             </motion.div>

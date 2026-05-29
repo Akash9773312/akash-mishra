@@ -31,7 +31,6 @@ export default function Footer() {
             <span className="text-green-500">root@kali:~$</span> echo "Built with"
             <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" />
             <span>by Akash</span>
-            <span className="animate-blink text-green-500">█</span>
           </motion.div>
         </motion.div>
 
