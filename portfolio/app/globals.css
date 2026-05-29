@@ -196,6 +196,29 @@
   }
 }
 
+@keyframes gridMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 50px;
+  }
+}
+
+@keyframes hologram {
+  0% {
+    opacity: 0.1;
+    transform: translateY(-100%);
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0.1;
+    transform: translateY(100%);
+  }
+}
+
 .animate-scan {
   animation: scanline 8s linear infinite;
 }
@@ -254,4 +277,9 @@
     linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
   background-size: 40px 40px;
+}
+
+/* Hologram animation */
+.animate-hologram {
+  animation: hologram 8s linear infinite;
 }
