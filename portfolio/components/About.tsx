@@ -105,7 +105,7 @@ export default function About() {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src={`${process.env.NODE_ENV === "production" ? "/akash-mishra" : ""}/about.png`}
+                src="/about.png"
                 alt="Akash Mishra"
                 className="w-full h-auto object-cover"
               />
