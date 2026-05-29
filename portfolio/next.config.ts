@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
 
-const nextConfig = {
-  output: 'export',
+const nextConfig: NextConfig = {
+  output: "export",
+
+  basePath: "/akash-mishra",
+  assetPrefix: "/akash-mishra/",
+
   images: {
     unoptimized: true,
   },
