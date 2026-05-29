@@ -80,7 +80,7 @@ export default function Hero() {
             >
               <Cpu className="w-4 h-4 text-green-500 terminal-glow" />
               <span className="text-green-400 text-sm">status: </span>
-              <span className="text-green-300">Available for freelance projects</span>
+              <span className="text-green-300">Available for anything interesting.</span>
               <span className="animate-blink text-green-500">█</span>
             </motion.div>
 
