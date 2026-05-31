@@ -108,6 +108,7 @@ export default function ContactPage() {
                     required
                     className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                     placeholder="Your name"
+                    suppressHydrationWarning
                   />
                 </div>
                 <div>
@@ -122,6 +123,7 @@ export default function ContactPage() {
                     required
                     className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary"
                     placeholder="your@email.com"
+                    suppressHydrationWarning
                   />
                 </div>
                 <div>
@@ -136,6 +138,7 @@ export default function ContactPage() {
                     required
                     className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none"
                     placeholder="Tell me about your project..."
+                    suppressHydrationWarning
                   />
                 </div>
                 <button

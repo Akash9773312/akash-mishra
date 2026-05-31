@@ -56,14 +56,14 @@ export default function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
         >
           <a
-            href="#projects"
+            href="/projects"
             className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity flex items-center gap-2"
           >
             <Zap className="w-4 h-4" />
             View Projects
           </a>
           <a
-            href="#contact"
+            href="/contact"
             className="px-6 py-3 border border-border rounded-lg font-medium text-foreground hover:bg-accent transition-colors flex items-center gap-2"
           >
             <Shield className="w-4 h-4" />
@@ -72,18 +72,6 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <a href="#about" className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors">
-          <span className="text-sm">Scroll to explore</span>
-          <ArrowDown className="w-5 h-5 animate-bounce" />
-        </a>
-      </motion.div>
     </section>
   )
 }
