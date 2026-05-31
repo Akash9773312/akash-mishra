@@ -1,0 +1,40 @@
+---
+title: How I Ran Multi-Region Infrastructure for 8,000+ Devices at 99.99% Uptime
+description: The architecture, failure-domain thinking, and observability that kept a multi-region fleet of 8,000+ devices online.
+createdAt: 2025-03-28
+updatedAt: 2025-03-28
+---
+
+> Draft, to be refined by Akash.
+
+Four nines means roughly **under an hour of downtime a year**. Delivering that
+across a multi-region fleet of **8,000+ devices**, while cutting infra cost by
+50%, came down to a few principles applied relentlessly.
+
+## Design around failure domains
+
+Every dependency is a potential outage. I mapped the blast radius of each
+component and made sure no single region, AZ, or service could take the whole
+system down. Multi-region wasn't a marketing checkbox, it was the failure model.
+
+## Make health observable, then automatic
+
+- Real health checks (not just "is the port open").
+- Automated failover and self-healing for the common failure modes.
+- Dashboards and alerts tuned to symptoms users feel, not raw metrics noise.
+
+## Roll out changes safely
+
+Progressive delivery, canaries and staged rollouts, so a bad change hits 1% of
+devices, not 100%. Fast, automated rollback when the canary looks wrong.
+
+## Cost and reliability are the same conversation
+
+Reliability often *saves* money: autoscaling to real demand, killing idle
+capacity, and consolidating duplicated infrastructure took 50% off the bill
+while making the system more predictable.
+
+## Takeaway
+
+Uptime isn't luck. It's failure-domain design, honest health signals, automated
+recovery, and rollouts that fail small.

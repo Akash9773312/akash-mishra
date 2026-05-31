@@ -1,0 +1,56 @@
+import { LogoMark } from "@/components/logo-mark"
+import { USER } from "@/features/portfolio/data/user"
+
+import { FlipSentences } from "./flip-sentences"
+import { PronounceMyName } from "./pronounce-my-name"
+import { VerifiedIcon } from "./verified-icon"
+
+export function ProfileHeader() {
+  return (
+    <div className="screen-line-bottom flex border-x border-line">
+      <div className="shrink-0 border-r border-line">
+        <div className="mx-0.5 my-0.75 flex size-30 items-center justify-center rounded-full bg-muted ring-1 ring-border min-[24rem]:size-32 sm:size-40">
+          <LogoMark className="size-1/2 text-foreground" />
+        </div>
+      </div>
+
+      <div className="flex flex-1 flex-col">
+        {/* <div className="flex grow items-end pb-1 pl-4">
+          <div
+            className="line-clamp-1 font-mono text-xs text-zinc-300 select-none max-sm:hidden dark:text-zinc-800"
+            aria-hidden
+          >
+            {"text-3xl "}
+            <span className="inline dark:hidden">text-zinc-950</span>
+            <span className="hidden dark:inline">text-zinc-50</span>
+            {" font-medium"}
+          </div>
+        </div> */}
+        <div className="grow" />
+
+        <div className="border-t border-line">
+          <div className="flex items-center gap-2 pl-4">
+            <h1 className="-translate-y-px text-3xl font-semibold tracking-tight">
+              {USER.displayName}
+            </h1>
+
+            <VerifiedIcon
+              className="size-4.5 text-info select-none"
+              aria-hidden
+            />
+
+            {USER.namePronunciationUrl && (
+              <PronounceMyName
+                namePronunciationUrl={USER.namePronunciationUrl}
+              />
+            )}
+          </div>
+
+          <FlipSentences className="h-12.5 border-t border-line py-1 pl-4 sm:h-9">
+            {USER.flipSentences}
+          </FlipSentences>
+        </div>
+      </div>
+    </div>
+  )
+}

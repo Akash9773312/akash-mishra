@@ -1,0 +1,42 @@
+---
+title: How I Shipped an AI Campaign That Served 5 Lakh Users in 10 Hours
+description: Single-day deployment of a real-time AI experience for NPCI's Independence Day campaign, scaling inference, caching, and graceful degradation under spiky load.
+createdAt: 2025-04-15
+updatedAt: 2025-04-15
+---
+
+> Draft, to be refined by Akash.
+
+For NPCI's Independence Day campaign, *Unfold the Untold*, users scanned a
+tri-colour object with their phone to unlock stories from remote parts of India.
+It went live for a single day and served roughly **5 lakh users in 10 hours**, 
+a brutal, spiky load profile with no second chances.
+
+## Plan for the spike, not the average
+
+A one-day campaign is all peak. I sized the system for the worst plausible
+burst, load-tested against it, and built headroom into the inference tier so the
+first viral hour didn't tip everything over.
+
+## Make inference cheap and fast
+
+- Cached and deduplicated repeated work so identical scans didn't re-run the
+  full pipeline.
+- Kept the model-serving path lean with tight timeouts and batching.
+- Pushed static and repeatable responses to the edge.
+
+## Degrade gracefully
+
+Under extreme load, a slightly simpler response beats a failed one. I built
+fallbacks so that if the heaviest path was saturated, users still got a fast,
+coherent experience instead of an error.
+
+## Observe in real time
+
+With a 10-hour window, you fix things *as they happen*. Live dashboards on
+latency, error rate, and queue depth let us tune in flight.
+
+## Takeaway
+
+High-stakes, single-day launches reward preparation: size for the spike, cache
+aggressively, degrade gracefully, and watch it like a hawk while it's live.

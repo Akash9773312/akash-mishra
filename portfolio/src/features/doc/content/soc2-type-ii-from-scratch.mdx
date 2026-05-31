@@ -1,0 +1,43 @@
+---
+title: How I Drove SOC 2 Type II Compliance Across Regulated Workloads
+description: Taking banking, healthcare, insurance, and government workloads through SOC 2 Type II, controls as code, evidence automation, and the human side.
+createdAt: 2025-03-05
+updatedAt: 2025-03-05
+---
+
+> Draft, to be refined by Akash.
+
+SOC 2 Type II is where good intentions meet auditors. I led the effort across
+workloads in **banking, healthcare, insurance, and government**, four of the
+most demanding sectors there are. Here's the approach that got us there without
+grinding engineering to a halt.
+
+## Treat controls as code
+
+Every control that *can* be automated, should be. Access reviews, encryption at
+rest/in transit, logging, backup verification, change management, wired into
+the pipeline and infrastructure-as-code so the "secure" path is the default
+path, not an extra step.
+
+## Automate the evidence, not just the control
+
+Type II is about proving controls worked *over time*. The trick is collecting
+evidence continuously, audit logs, IaC plan/apply records, access logs,
+ticket-linked change history, so the audit window is a query, not a scramble.
+
+## Least privilege, enforced
+
+- Short-lived credentials over long-lived keys.
+- Role-based access tied to identity, reviewed on a schedule.
+- Network segmentation between regulated and non-regulated workloads.
+
+## The human side
+
+Compliance fails when it's one person's problem. I made it a shared default:
+templates, guardrails, and clear runbooks so engineers stayed fast while staying
+inside the lines.
+
+## Takeaway
+
+Compliance and velocity aren't opposites. Encode the controls, automate the
+evidence, and the audit becomes a formality instead of a fire drill.

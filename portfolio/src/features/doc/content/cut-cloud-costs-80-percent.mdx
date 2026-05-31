@@ -1,0 +1,45 @@
+---
+title: How I Cut Cloud Costs by 80% Without Slowing Anyone Down
+description: A practical playbook for finding and killing cloud waste, right-sizing, autoscaling, and the architecture changes that actually move the bill.
+createdAt: 2025-02-10
+updatedAt: 2025-02-10
+---
+
+> Draft, to be refined by Akash.
+
+When I joined as Lead DevOps & Compliance Engineer, the cloud bill was the
+single largest line item nobody fully understood. Over a few months I brought it
+down by roughly **80%**, without a single user-facing regression. Here's how.
+
+## 1. Make the bill legible before touching anything
+
+You can't optimise what you can't see. The first week was pure measurement:
+cost allocation tags, per-service and per-environment breakdowns, and a simple
+rule, every dollar must map to a team and a workload.
+
+The biggest surprises are almost always the boring ones: idle non-prod
+environments running 24/7, oversized instances chosen "to be safe," and
+forgotten snapshots/volumes quietly accruing cost.
+
+## 2. Right-size with evidence, not vibes
+
+I pulled real CPU/memory/IO utilisation over 30 days and right-sized against the
+**p95**, not the peak. Most fleets were provisioned 3–5x over what they used.
+
+## 3. Let autoscaling do the night shift
+
+Non-production environments now scale to zero outside working hours. Production
+scales horizontally on real signals (queue depth, request latency) instead of
+running a fixed, always-on peak fleet.
+
+## 4. Architecture changes that move the needle
+
+- Moved bursty, stateless work to spot/preemptible capacity with graceful drain.
+- Added caching and CDN offload so origin compute did less work per request.
+- Consolidated over-provisioned databases and tuned storage tiers.
+
+## Takeaway
+
+Cost optimisation isn't a one-time cleanup, it's an architecture discipline.
+Tag everything, size against p95, scale to zero where you can, and review the
+bill like you review latency.

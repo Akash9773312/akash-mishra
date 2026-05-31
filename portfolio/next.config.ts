@@ -1,10 +1,55 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-  output: "export",
+  reactStrictMode: true,
+  transpilePackages: ["next-mdx-remote"],
+  devIndicators: false,
   images: {
-    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.simpleicons.org",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        port: "",
+      },
+    ],
+    qualities: [75, 100],
   },
-};
+  compiler:
+    process.env.NODE_ENV === "production"
+      ? {
+          removeConsole: {
+            exclude: ["error"],
+          },
+        }
+      : undefined,
+  async rewrites() {
+    return [
+      {
+        source: "/blog/:slug.mdx",
+        destination: "/doc.mdx/:slug",
+      },
+      {
+        source: "/blog/:slug",
+        destination: "/doc.mdx/:slug",
+        has: [
+          {
+            type: "header",
+            key: "accept",
+            value: "(?<accept>.*text/markdown.*)",
+          },
+        ],
+      },
+      {
+        source: "/rss",
+        destination: "/blog/rss",
+      },
+    ]
+  },
+}
 
-export default nextConfig;
+export default nextConfig
